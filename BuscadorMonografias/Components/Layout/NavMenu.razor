@@ -1,0 +1,37 @@
+﻿<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">Buscador de Monografias, Mapas y Esquemas</a>
+    </div>
+</div>
+
+<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+
+<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
+    <nav class="nav flex-column">
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="monografias">
+                <MudIcon Icon="@Icons.Material.Filled.ImageAspectRatio" /> Monografias
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="agregar-monografia">
+                <MudIcon Icon="@Icons.Material.Filled.Add" Title="Add" />  Agregar Monografias
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="mapasesquemas">
+                <MudIcon Icon="@Icons.Material.Filled.Public" /> Mapas y Esquemas
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-1">
+            <NavLink class="nav-link" href="agregar-mapaesquema">
+                <MudIcon Icon="@Icons.Material.Filled.Add" Title="Add" /> Agregar Mapas y Esquemas
+            </NavLink>
+        </div>
+    </nav>
+</div>
+

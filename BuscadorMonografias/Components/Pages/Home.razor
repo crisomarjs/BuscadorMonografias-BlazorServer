@@ -1,0 +1,22 @@
+﻿@page "/"
+
+<MudCard Class="mud-elevation-6" Style="max-width: 600px; margin: auto; text-align: center;">
+    <MudCardMedia Image="images/welcome.jpg" Height="250" />
+    <MudCardContent>
+        <MudText Typo="Typo.h4" Color="Color.Tertiary" Class="mb-2">Bienvenido al Buscador de Monografías</MudText>
+        <MudText Typo="Typo.body1" Class="mb-2">
+            Encuentra monografías, mapas y esquemas de manera rápida y sencilla.
+        </MudText>
+        <MudText Typo="Typo.body2">
+            Explora nuestra base de datos y accede a los documentos que necesitas.
+        </MudText>
+    </MudCardContent>
+    <MudCardActions Class="justify-content-center">
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="GoToMonografias" Class="mr-8">
+            Buscar Monografías
+        </MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="GoToMapasEsquemas" Margin="Margin.Normal">
+            Buscar Mapas y Esquemas
+        </MudButton>
+    </MudCardActions>
+</MudCard>

@@ -1,0 +1,21 @@
+﻿@page "/mapasesquemas"
+@using BuscadorMonografias.Models
+
+<PageTitle>Mapas y Esquemas</PageTitle>
+
+<MudDataGrid T="MapaEsquema" Items="listaMapasEsquemas" Filterable="false">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Lista de Mapas y Esquemas</MudText>
+        <MudSpacer />
+        <MudTextField T="string" ValueChanged="@(s => OnSearch(s))" Placeholder="Buscar..."
+                      Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
+                      IconSize="Size.Medium" Class="mt-0" />
+    </ToolBarContent>
+    <Columns>
+        <PropertyColumn Property="x => x.Id" Title="ID" />
+        <PropertyColumn Property="x => x.Nombre" Title="Nombre" />
+    </Columns>
+    <PagerContent>
+        <MudDataGridPager T="Monografia" />
+    </PagerContent>
+</MudDataGrid>
