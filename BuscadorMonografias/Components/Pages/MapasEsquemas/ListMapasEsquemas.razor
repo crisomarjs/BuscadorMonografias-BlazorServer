@@ -3,7 +3,10 @@
 
 <PageTitle>Mapas y Esquemas</PageTitle>
 
-<MudDataGrid T="MapaEsquema" Items="listaMapasEsquemas" Filterable="false">
+<MudDataGrid T="MapaEsquema" Items="listaMapasEsquemas" Filterable="false" ReadOnly="@_readOnly"
+             EditMode="@(_isCellEditMode ? DataGridEditMode.Cell : DataGridEditMode.Form)"
+             StartedEditingItem="@StartedEditingItem" CanceledEditingItem="@CanceledEditingItem" CommittedItemChanges="@CommittedItemChanges"
+             Bordered="true" Dense="true" EditTrigger="@(_editTriggerRowClick ? DataGridEditTrigger.OnRowClick : DataGridEditTrigger.Manual)">
     <ToolBarContent>
         <MudText Typo="Typo.h6">Lista de Mapas y Esquemas</MudText>
         <MudSpacer />
@@ -12,8 +15,13 @@
                       IconSize="Size.Medium" Class="mt-0" />
     </ToolBarContent>
     <Columns>
-        <PropertyColumn Property="x => x.Id" Title="ID" />
+        <PropertyColumn Property="x => x.Id" Title="ID" Editable="false" />
         <PropertyColumn Property="x => x.Nombre" Title="Nombre" />
+        <TemplateColumn Hidden="@(_isCellEditMode || _readOnly || _editTriggerRowClick)" CellClass="d-flex justify-end">
+            <CellTemplate>
+                <MudIconButton Size="@Size.Small" Icon="@Icons.Material.Outlined.Edit" OnClick="@context.Actions.StartEditingItemAsync" />
+            </CellTemplate>
+        </TemplateColumn>
     </Columns>
     <PagerContent>
         <MudDataGridPager T="MapaEsquema" />

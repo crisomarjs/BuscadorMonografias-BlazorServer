@@ -10,6 +10,12 @@ namespace BuscadorMonografias.Components.Pages.MapasEsquemas
         private IMapasEsquemasRepository MapasEsquemasRepository { get; set; }
         private List<MapaEsquema> listaMapasEsquemas = new List<MapaEsquema>();
         public string _searchString;
+        private bool _readOnly;
+        private bool _isCellEditMode;
+        private List<string> _events = new();
+        private bool _editTriggerRowClick;
+        [Inject]
+        NavigationManager navigationManager { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -22,7 +28,7 @@ namespace BuscadorMonografias.Components.Pages.MapasEsquemas
 
             if (string.IsNullOrWhiteSpace(searchString))
             {
-                listaMapasEsquemas = await MapasEsquemasRepository.GetMapasEsquemas(); // Cargar todos
+                listaMapasEsquemas = await MapasEsquemasRepository.GetMapasEsquemas();
             }
             else
             {
@@ -31,5 +37,36 @@ namespace BuscadorMonografias.Components.Pages.MapasEsquemas
                     .ToList();
             }
         }
+
+        void StartedEditingItem(MapaEsquema item)
+        {
+            _events.Insert(0, $"Event = StartedEditingItem, Data = {System.Text.Json.JsonSerializer.Serialize(item)}");
+        }
+
+        void CanceledEditingItem(MapaEsquema item)
+        {
+            _events.Insert(0, $"Event = CanceledEditingItem, Data = {System.Text.Json.JsonSerializer.Serialize(item)}");
+        }
+
+        private async Task CommittedItemChanges(MapaEsquema item)
+        {
+            if (item == null || item.Id == 0)
+            {
+                _events.Insert(0, "Error: No se pudo actualizar, el elemento no tiene un ID válido.");
+                return;
+            }
+
+            try
+            {
+                await MapasEsquemasRepository.UpdateMapasEsquema(item.Id, item);
+                _events.Insert(0, $"Evento = CommittedItemChanges, Data = {System.Text.Json.JsonSerializer.Serialize(item)}");
+                navigationManager.NavigateTo("/mapasesquemas", forceLoad: true);
+            }
+            catch (Exception ex)
+            {
+                _events.Insert(0, $"Error al actualizar: {ex.Message}");
+            }
+        }
+
     }
 }

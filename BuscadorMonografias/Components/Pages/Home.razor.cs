@@ -9,12 +9,12 @@ namespace BuscadorMonografias.Components.Pages
 
         private void GoToMonografias()
         {
-            navigationManager.NavigateTo("/mapasesquemas");
+            navigationManager.NavigateTo("/monografias");
         }
 
         private void GoToMapasEsquemas()
         {
-            navigationManager.NavigateTo("/monografias");
+            navigationManager.NavigateTo("/mapasesquemas");
         }
 
     }
